@@ -25,8 +25,7 @@
 
 using namespace std;
 
-//The code below has been tested for memory leaks using Valgrind
-//No memory leaks for the addition, deletion scenarios were found
+
 class SingleLinkedList;
 
 //Each Node contains data and a pointer to the next node in the Linked List
@@ -130,11 +129,14 @@ void SingleLinkedList::delete_node(int value){
 	if(head == 0){
 		return;
 	}
-	else if(head == tail){
+	if(head == tail){
 		if(head->data == value){
 			size=0;
 			delete_front();
 		}
+	}
+	else if(head->data == value){
+		delete_front();
 	}
 	else{
 		shared_ptr<Node> node1 = head;
@@ -195,8 +197,8 @@ int main(){
 	sng.push_back(56);
 	sng.push_back(96);
 	sng.push_back(66);
-	sng.delete_node(13);
+	sng.delete_node(15);
 	cout<<sng;
 	sng.reverseList();
-	cout<<sng;
+	cout<<endl<<sng;
 }
